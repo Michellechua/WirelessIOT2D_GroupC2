@@ -1,65 +1,24 @@
-# ESP RainMaker
+# Switch Example
 
-> This branch will not support esp-idf v4.x releases anymore as they have reached their end of life. Please check out `idf_4_x_compat` branch if your project requires it.
+## Build and Flash firmware
 
-> Note: For major changes, please refer [this file](CHANGES.md).
+Follow the ESP RainMaker Documentation [Get Started](https://rainmaker.espressif.com/docs/get-started.html) section to build and flash this firmware. Just note the path of this example.
 
-## Introduction
+## What to expect in this example?
 
-ESP RainMaker is an end-to-end solution offered by Espressif to enable remote control and monitoring for products based on ESP32 series of SoCs (e.g., ESP32, ESP32-S2, ESP32-C3, ESP32-C6, ESP32-C2, etc.) without any configuration required in the Cloud. <br>
-
-The primary components of this solution are:
-
-- Claiming Service (to get the Cloud connectivity credentials)
-- RainMaker Agent (i.e. this repo, to develop the firmware)
-- RainMaker Cloud (backend, offering remote connectivity)
-- RainMaker Phone App/CLI (Client utilities for remote access)
-
-
-The key features of ESP RainMaker are:
-
-1. Ability to define own devices and parameters, of any type, in the firmware.
-2. Zero configuration required on the Cloud.
-3. Phone apps that dynamically render the UI as per the device information.
-
-## Get ESP RainMaker
-
-Please clone this repository using the below command:
+- This example uses the BOOT button and RGB LED on the ESP32-S2-Saola-1/ESP32-C3-DevKitC board to demonstrate a switch.
+- The LED state (green color) indicates the state of the switch.
+- Pressing the BOOT button will toggle the state of the switch and hence the LED. This will also reflect on the phone app.
+- Toggling the button on the phone app should toggle the LED on your board, and also print messages like these on the ESP32-S2 monitor:
 
 ```
-git clone --recursive https://github.com/espressif/esp-rainmaker.git
+I (16073) app_main: Received value = true for Switch - power
 ```
 
-> Note the --recursive option. This is required to pull in the various dependencies into esp-rainmaker. In case you have already cloned the repository without this option, execute this to pull in the submodules: `git submodule update --init --recursive`
+### LED not working?
 
-Please check the ESP RainMaker documentation [here](https://rainmaker.espressif.com/docs/get-started.html) to get started.
+The ESP32-S2-Saola-1 board has the RGB LED connected to GPIO 18. However, a few earlier boards may have it on GPIO 17. Please use `CONFIG_WS2812_LED_GPIO` to set the appropriate value.
 
-Each example has its own README with additional information about using the example.
+### Reset to Factory
 
-## Supported ESP-IDF versions
-
-ESP RainMaker can work with ESP IDF 4.1 and above.
-
-## Phone Apps
-
-### Android
-
-- [Google PlayStore](https://play.google.com/store/apps/details?id=com.espressif.rainmaker)
-- [Direct APK](https://github.com/espressif/esp-rainmaker/wiki)
-- [Source Code](https://github.com/espressif/esp-rainmaker-android)
-
-### iOS
-- [Apple App Store](https://apps.apple.com/app/esp-rainmaker/id1497491540)
-- [Source Code](https://github.com/espressif/esp-rainmaker-ios)
-
-## Discussions
-
-[ESP32 Forum](https://www.esp32.com/viewforum.php?f=41)
-
-[![Gitter Chat](https://badges.gitter.im/esp-rainmaker/community.svg)](https://gitter.im/esp-rainmaker/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
----
-
-<a href="https://espressif.github.io/esp-launchpad/?solution=rainmaker">
-    <img alt="Try it with ESP Launchpad" src="https://espressif.github.io/esp-launchpad/assets/try_with_launchpad.png" width="250" height="70">
-</a>
+Press and hold the BOOT button for more than 3 seconds to reset the board to factory defaults. You will have to provision the board again to use it.
